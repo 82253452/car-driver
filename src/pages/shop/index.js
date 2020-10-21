@@ -13,7 +13,7 @@ export default function () {
 
   console.log('shopping')
 
-  const {data = [], fetchMore, canFetchMore, refetch} = useInfiniteQuery(PRODUCT_LIST, (key, page = 1) => request(PRODUCT_LIST, {page}), {
+  const {data = [], fetchMore, canFetchMore, refetch} = useInfiniteQuery(PRODUCT_LIST, (key, page = 1) => request(PRODUCT_LIST, {page,type:1}), {
     getFetchMore: lastGroup => lastGroup.nextPage
   })
 
@@ -26,16 +26,17 @@ export default function () {
   })
 
   function handleButton(id) {
-    Taro.showModal({title: '确定兑换商品?'}).then(({confirm}) => {
-      confirm && request(PRODUCT_ORDER_SUBMIT, {id}).then(() => {
-        Taro.showToast({title: '兑换成功',icon: 'none'})
+    Taro.showModal({title: '确定购买商品?'}).then(({confirm}) => {
+      confirm && request(PRODUCT_ORDER_SUBMIT, {id}).then(res => {
+        Taro.requestPayment(res).then(()=>{
+          Taro.showToast({title: '购买成功',icon: 'none'})
+        })
       })
     })
-
   }
 
   return (
-    <NavBar back home title='积分商城' viewBackGround='#F3F5F4'>
+    <NavBar back home title='商城' viewBackGround='#F3F5F4'>
       <View className='index'>
         <View className='list'>
           {data.map(r => r.list.map(d => <View className='item'>
@@ -46,7 +47,7 @@ export default function () {
                 <View className='price'>{d.price} 积分</View>
                 <View className='num'>剩余 {d.price}</View>
               </View>
-              <View className='button' onClick={() => handleButton(d.id)}>兑换</View>
+              <View className='button' onClick={() => handleButton(d.id)}>购买</View>
             </View>
           </View>))}
         </View>

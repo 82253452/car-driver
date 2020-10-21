@@ -1,6 +1,6 @@
 export default {
   pages: [
-    'pages/index/index',
+    'pages/driverIndex/index',
     'pages/address/index',
     'pages/center/center',
     'pages/authorize/index',
@@ -11,7 +11,6 @@ export default {
     'pages/companyCertification/index',
     'pages/shop/index',
     'pages/driver/index',
-    'pages/driverIndex/index',
     'pages/transCompany/index',
   ],
   permission: {
@@ -34,7 +33,7 @@ export default {
       text: '首页',
       iconPath: 'img/shouyeb.png',
       selectedIconPath: 'img/shouye.png',
-      pagePath: 'pages/index/index',
+      pagePath: 'pages/driverIndex/index',
     },
       {
         text: '订单',
@@ -43,7 +42,7 @@ export default {
         pagePath: 'pages/order/index'
       },
       {
-        text: '积分商城',
+        text: '商城',
         iconPath: 'img/jifenshangcheng.png',
         selectedIconPath: 'img/ajifenshangcheng.png',
         pagePath: 'pages/shop/index'
