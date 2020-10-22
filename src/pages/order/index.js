@@ -59,9 +59,8 @@ export default function () {
   return (
     <View className='index'>
       <View className='item_container'>
-        <SwiperScroll title='订单页' ref={swiperRef} labels={['全部', '抢单', '派单', '派送中', '待确认', '已完结']}>
+        <SwiperScroll title='订单页' ref={swiperRef} labels={['全部', '派单', '派送中', '待确认', '已完结']}>
           <AllListCurrentView swiperRef={swiperRef} />
-          <ListCurrentView swiperRef={swiperRef} />
           <ReceiveView swiperRef={swiperRef} />
           <InTransitView swiperRef={swiperRef} />
           <ConfirmedView swiperRef={swiperRef} />
@@ -167,19 +166,6 @@ function AllListCurrentView({swiperRef}) {
   />
 }
 
-function ListCurrentView({swiperRef}) {
-  console.log('ListCurrentView')
-  const {data = [], fetchMore, canFetchMore, refetch} = useInfiniteQuery(`${ORDER_INDEX_LIST}_0`, (key, page = 1) => request(ORDER_INDEX_LIST, {
-    page,
-    type: 0
-  }), {
-    getFetchMore: lastGroup => lastGroup.nextPage
-  })
-  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={1}
-    swiperRef={swiperRef}
-  />
-}
-
 function ReceiveView({swiperRef}) {
   console.log('ReceiveView')
   const {data = [], fetchMore, canFetchMore, refetch} = useInfiniteQuery(`${ORDER_INDEX_LIST}_1`, (key, page = 1) => request(ORDER_STATUS_LIST, {
@@ -188,7 +174,7 @@ function ReceiveView({swiperRef}) {
   }), {
     getFetchMore: lastGroup => lastGroup.nextPage
   })
-  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={2}
+  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={1}
     swiperRef={swiperRef}
   />
 }
@@ -201,7 +187,7 @@ function InTransitView({swiperRef}) {
   }), {
     getFetchMore: lastGroup => lastGroup.nextPage
   })
-  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={3}
+  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={2}
     swiperRef={swiperRef}
   />
 }
@@ -214,7 +200,7 @@ function ConfirmedView({swiperRef}) {
   }), {
     getFetchMore: lastGroup => lastGroup.nextPage
   })
-  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={4}
+  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={3}
     swiperRef={swiperRef}
   />
 }
@@ -224,7 +210,7 @@ function FinalView({swiperRef}) {
   const {data = [], fetchMore, canFetchMore, refetch} = useInfiniteQuery(ORDER_FINASH_LIST, (key, page = 1) => request(ORDER_FINASH_LIST, {page}), {
     getFetchMore: lastGroup => lastGroup.nextPage
   })
-  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={5}
+  return <ListView data={data} fetchMore={fetchMore} canFetchMore={canFetchMore} refetch={refetch} index={4}
     swiperRef={swiperRef}
   />
 }

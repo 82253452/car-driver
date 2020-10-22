@@ -1,8 +1,9 @@
-import {LOGIN, PHONE_INFO, USER_INFO} from "@/api";
+import {USER_INFO} from "@/api";
 import Taro from '@tarojs/taro'
 import {APP_ID} from "./Const";
 
 export async function request(url, data, auth = true) {
+  console.log(url)
   if (!url) {
     return;
   }
@@ -30,11 +31,13 @@ export async function requestBase(data, auth = true) {
         reject(res)
         return
       }
-      if (res.data.code === 100) {
+      if (res.data.code === 100 || res.data.code === 3) {
         try {
           await getUserInfo()
-          await request(data, auth).then(resd => resolve(resd))
+          await requestBase(data, auth).then(resd => resolve(resd))
         } catch (e) {
+          console.log('重新登录')
+          console.log(e)
           auth && gotoAuthrize()
           auth || reject(res)
         }
