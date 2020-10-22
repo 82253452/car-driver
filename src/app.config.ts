@@ -1,7 +1,6 @@
 export default {
   pages: [
-    'pages/driverIndex/index',
-    'pages/address/index',
+    'pages/index/index',
     'pages/center/center',
     'pages/authorize/index',
     'pages/order/index',
@@ -33,7 +32,7 @@ export default {
       text: '首页',
       iconPath: 'img/shouyeb.png',
       selectedIconPath: 'img/shouye.png',
-      pagePath: 'pages/driverIndex/index',
+      pagePath: 'pages/index/index',
     },
       {
         text: '订单',

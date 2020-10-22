@@ -28,7 +28,7 @@ export default function () {
   function handleButton(id) {
     Taro.showModal({title: '确定购买商品?'}).then(({confirm}) => {
       confirm && request(PRODUCT_ORDER_SUBMIT, {id}).then(res => {
-        Taro.requestPayment(res).then(()=>{
+        Taro.requestPayment({...res,package:res.packageValue}).then(()=>{
           Taro.showToast({title: '购买成功',icon: 'none'})
         })
       })
@@ -44,7 +44,7 @@ export default function () {
             <View className='title'>{d.name}</View>
             <View className='info'>
               <View className='info_s'>
-                <View className='price'>{d.price} 积分</View>
+                <View className='price'>￥{d.price}</View>
                 <View className='num'>剩余 {d.price}</View>
               </View>
               <View className='button' onClick={() => handleButton(d.id)}>购买</View>

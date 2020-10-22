@@ -38,7 +38,7 @@ export default function () {
           <Text className='nick_name'>{user.nickname || '登录'}</Text>
           <View className='integral'>
             <Image src={xinyu} style={{width: '26rpx', height: '34rpx'}} />
-            <Text>信誉积分：100</Text>
+            <Text>信誉:{user.creditScore} 余额:{user.amount}</Text>
           </View>
         </View>
       </View>
@@ -133,9 +133,9 @@ function Items() {
           </View>
         </View>
         <View className='block center'>
-          <View className='block_button'>
+          <Button  openType='share' className='content block_button'>
             邀请有奖
-          </View>
+          </Button>
         </View>
       </View>
     </View>
