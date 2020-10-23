@@ -156,7 +156,7 @@ function ListView({data, canFetchMore, fetchMore, index, refetch, swiperRef}) {
               }[d.orderType]
             }}
             >{{0: '个人', 1: '企业'}[d.orderType]}</View></View>
-            <View> <View className='title'>零部件200t，10m³共20托</View></View>
+            <View> <View className='title'>{d.des}</View></View>
           </View>
           <View className='center_c' style={{display: 'flex', alignItems: 'center'}}>
             <Image src={tujing1} style={{width: '14rpx', height: '14rpx'}} />
