@@ -66,7 +66,7 @@ export default function ({
     selectChange,
     refreshDom
   }
-  const SwiperScroll = useSwiperScrollElement(apiRef.current)
+  const SwiperScroll =  useSwiperScrollElement(apiRef.current)
   apiRef.current.SwiperScroll = SwiperScroll
 
   return apiRef.current

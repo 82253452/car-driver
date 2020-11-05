@@ -11,6 +11,9 @@ export default {
     'pages/shop/index',
     'pages/driver/index',
     'pages/transCompany/index',
+    'pages/shopDetail/index',
+    'pages/shopOrderList/index',
+    'pages/shopOrderDetail/index',
   ],
   permission: {
     "scope.userLocation": {

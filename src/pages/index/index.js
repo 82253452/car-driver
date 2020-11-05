@@ -21,40 +21,6 @@ import useEffectOnce from "react-use/lib/useEffectOnce";
 import useUpdateEffect from "react-use/lib/useUpdateEffect";
 import './index.less'
 
-const orderStatus = {
-  0: {
-    text: '待接单',
-    color: '#CE0801'
-  },
-  1: {
-    text: '待配送',
-    color: '#F0741C'
-  },
-  2: {
-    text: '配送中',
-    color: '#02BB00'
-  },
-  3: {
-    text: '待完成',
-    color: '#333333'
-  },
-  4: {
-    text: '已完成',
-    color: '#333333'
-  },
-  5: {
-    text: '派送取消',
-    color: '#333333'
-  },
-  6: {
-    text: '派送异常',
-    color: '#333333'
-  },
-  7: {
-    text: '派送超时',
-    color: '#333333'
-  },
-}
 const discharge = ['国四', '国五', '国六']
 
 function useData() {
@@ -204,11 +170,7 @@ function PanelBlock({id, children}) {
     }, 300)
   })
   return <View className={`item_observer_${id}`} id={id}>
-    {isShow ? children : <Skeleton row={1} rowProps={{
-      width: '100%%',
-      height: '243px'
-    }}
-    ></Skeleton>}
+    {isShow ? children : <Skeleton height={182} />}
   </View>
 }
 
