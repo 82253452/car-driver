@@ -49,9 +49,14 @@ export default function () {
 }
 
 function Header() {
+
+  function toOrder(){
+    Taro.navigateTo({url: '/pages/shopOrderList/index'})
+  }
+
   return <Panel marginTop={-45}>
     <View className='header_nav'>
-      <View className='item'>
+      <View className='item' onClick={toOrder}>
         <Image src={dingdan2} style={{width: '76rpx', height: '82rpx'}} />
         <Text>全部订单</Text>
       </View>
@@ -66,16 +71,31 @@ function Header() {
     </View>
   </Panel>
 }
+
 function Items() {
+  const user = useSelector(state => state.user)
+
+  const isCompanyAuth = user.company && user.company.status===2
+  const isDriverAuth = user.driver && user.driver.status===2
+
   function toCompany() {
-    Taro.navigateTo({url: '/pages/companyCertification/index'})
+    if (!user.id) {
+      Taro.navigateTo({url: '/pages/authorize/index'})
+    } else
+      isCompanyAuth || Taro.navigateTo({url: '/pages/companyCertification/index'})
   }
+
   function makeCall() {
     Taro.makePhoneCall({phoneNumber: '15901320019'})
   }
-  function toDriver(){
-    Taro.navigateTo({url: '/pages/driver/index'})
+
+  function toDriver() {
+    if (!user.id) {
+      Taro.navigateTo({url: '/pages/authorize/index'})
+    } else
+      isDriverAuth || Taro.navigateTo({url: '/pages/driver/index'})
   }
+
   return <Panel space={0} borderRadius={0}>
     <View className='items_list'>
       <View className='header'>
@@ -86,14 +106,14 @@ function Items() {
         <View className='block border_bottom' onClick={toCompany}>
           <Image src={qiyerenzheng} style={{width: '45rpx', height: '45rpx'}} />
           <View className='block_r'>
-            <View className='button'>企业认证</View>
+            <View className='button'>{isCompanyAuth?'已认证':'企业认证'}</View>
             <View className='desc'>一点多票每票减40</View>
           </View>
         </View>
         <View className='block border_bottom' onClick={toDriver}>
           <Image src={sijirenzheng} style={{width: '45rpx', height: '45rpx'}} />
           <View className='block_r'>
-            <View className='button yellow'>司机认证</View>
+            <View className='button yellow'>{isDriverAuth?'已认证':'司机认证'}</View>
             <View className='desc'>实时货物行程信息</View>
           </View>
         </View>
@@ -118,11 +138,11 @@ function Items() {
             <View className='desc'>常见问题快速解决</View>
           </View>
         </View>
-        <Button  openType='feedback' className='block border_bottom content'>
+        <Button openType='feedback' className='block border_bottom content'>
           <Image src={jianyi} style={{width: '45rpx', height: '45rpx'}} />
           <View className='block_r'>
-            <Text className='title' style={{lineHeight:'38rpx'}}>建议反馈</Text>
-            <Text className='desc' style={{lineHeight:'38rpx'}}>服务建议反馈</Text>
+            <Text className='title' style={{lineHeight: '38rpx'}}>建议反馈</Text>
+            <Text className='desc' style={{lineHeight: '38rpx'}}>服务建议反馈</Text>
           </View>
         </Button>
         <View className='block' onClick={makeCall}>
@@ -133,7 +153,7 @@ function Items() {
           </View>
         </View>
         <View className='block center'>
-          <Button  openType='share' className='content block_button'>
+          <Button openType='share' className='content block_button'>
             邀请有奖
           </Button>
         </View>

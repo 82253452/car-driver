@@ -37,13 +37,9 @@ export default function () {
   const dispatch = useDispatch()
 
   const panelRef = useRef()
+
   const {
-    data = {
-      latitudeFrom: 39.99126,
-      longitudeFrom: 116.46029,
-      latitudeTo: 39.99126,
-      longitudeTo: 116.46029
-    }
+    data = {}
   } = useQuery([ORDER_DETAIL, paramsId], () => request(ORDER_DETAIL, {id: paramsId}))
 
   const [polyline, setPolyline] = useState([])
@@ -115,6 +111,22 @@ export default function () {
   )
 
   function handelConfirm() {
+    if (!user.id) {
+      Taro.navigateTo({url: '/pages/authorize/index'})
+      return
+    }
+    const isDriverAuth = user.driver && user.driver.status===2
+    if(!isDriverAuth){
+      Taro.showModal({title: '请先进行司机认证！'})
+      return
+    }
+    const isTransDriver = user.transCompanyList && user.transCompanyList.length
+    if(data.orderType===1 && !isTransDriver){
+      Taro.showModal({title: '请先加入物流公司！'})
+      return
+    }
+
+
     if (data.status >= 4) {
       return
     }
@@ -197,11 +209,11 @@ export default function () {
 
   return <NavBar back home title='详情'>
     <View className='index'>
-      <Map scale={8} className='map' latitude={data.latitudeFrom - 1.2} longitude={data.longitudeFrom}
+      {data.latitudeFrom&&data.latitudeTo?<Map scale={8} className='map' latitude={data.latitudeFrom} longitude={data.longitudeFrom}
         polyline={polyline}
         markers={marks}
         includePoints={marks}
-      />
+      />:<View />}
       <View className='info'>
         <View className='info_list'>
           <Panel paddingLR={20} paddingUD={0} ref={panelRef}>
