@@ -57,12 +57,14 @@ function Search() {
     <View className='search_text'>
       <Image src={dingwei} style={{width: '31rpx', height: '38rpx', marginLeft: '20rpx'}} />
       <Picker mode='region' onChange={(e) => setData({...data, reginFrom: e.detail.value})}
+        customItem='全国'
         value={data.reginFrom || []}
       ><Text
         style={{whiteSpace: 'nowrap'}}
       >{data.reginFrom ? data.reginFrom[2] : '全国'}</Text></Picker>
       <Image src={jiantou} style={{width: '39rpx', height: '17rpx', marginLeft: '20rpx'}} />
       <Picker mode='region' onChange={(e) => setData({...data, reginTo: e.detail.value})}
+        customItem='全国'
         value={data.reginTo || []}
       ><Text
         style={{whiteSpace: 'nowrap'}}

@@ -155,7 +155,7 @@ export async function wxLogin() {
 
 export async function getLoginCodeSession() {
   let {code} = await Taro.login()
-  await Taro.checkSession().catch(async () => code = await Taro.login().then(res => res.code))
+  await Taro.checkSession().catch(async () => code = await Taro.login().then(res => code = res.code))
   return code
 }
 
