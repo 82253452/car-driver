@@ -30,7 +30,7 @@ export default forwardRef (({children, style, borderRadius = 15, marginTop = 20,
     }
   }))
 
-  return <View className={`panel-container ${animationName}`} style={{
+  return <View className={`panel-container ${animationName} ${animation && 'overflow'}`} style={{
     marginTop: `${marginTop}rpx`,
     padding: `${padding !== undefined ? padding : paddingUD}rpx ${padding !== undefined ? padding : paddingLR}rpx`,
     width: `calc(100% - ${space * 2}rpx)`,

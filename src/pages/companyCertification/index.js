@@ -15,7 +15,7 @@ export default function () {
 
   const user = useSelector(state => state.user)
 
-  const [data = {}, setData] = useState(user.company)
+  const [data = {}, setData] = useState(user.company || {})
 
   const rules = {
     name: {

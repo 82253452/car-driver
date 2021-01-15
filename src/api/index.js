@@ -28,6 +28,8 @@ export const TRANS_COMPANY_ATTACH = "/trans/attachCompany"
 
 export const COMPANY_CERT = "/api/company/certCompany POST"
 
+export const DRIVER_CERT = "/api/driver/register POST"
+
 export const BANNER_LIST = "/api/banner/list"
 
 export const PRODUCT_LIST = "/api/product/list"

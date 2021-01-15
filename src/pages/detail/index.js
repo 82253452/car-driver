@@ -201,11 +201,11 @@ export default function () {
     label: {
       content: '终点'
     }
-  }, ...data.addressRoute ? JSON.parse(data.addressRoute).map(r => ({
+  }, ...data.addressRoute ? JSON.parse(data.addressRoute).map(r => (r.name?{
     latitude: r.latitude, longitude: r.longitude, label: {
       content: '途径'
     }
-  })) : []]
+  }:null)).filter(l=>l) : []]
 
   return <NavBar back home title='详情'>
     <View className='index'>
@@ -222,7 +222,7 @@ export default function () {
             <PanelItemText title='手机号' value={data.phone} />
             <PanelItemText title='发货地址' value={data.addressFrom} />
             <PanelItemText title='途经地点'
-              value={data.addressRoute ? JSON.parse(data.addressRoute).map(r => `${r.name}`).join('-') : ''}
+              value={data.addressRoute ? JSON.parse(data.addressRoute).map(r => `${r.name?r.name:''}`).join('-') : ''}
             />
             <PanelItemText title='收货地址' value={data.addressTo} />
             <PanelItemText title='发运时间' value={`${data.deliveryTimeStart} -> ${data.deliveryTimeEnd}`} />
@@ -234,7 +234,7 @@ export default function () {
         <View className='info-button'>
           <View>
             <Text className='desc'>费用</Text>
-            <Text className='number'>￥100</Text>
+            <Text className='number'>￥{data.amount}</Text>
           </View>
           <OrderStatusButtons />
         </View>
